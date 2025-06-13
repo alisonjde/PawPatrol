@@ -3,25 +3,39 @@ require_once("persistencia/Conexion.php");
 require_once("persistencia/PaseadorDAO.php");
 require_once("logica/Persona.php");
 
-class Paseador extends Persona {
+class Paseador extends Persona
+{
     private $descripcion;
-    
-    public function __construct($id = "", $nombre="", $apellido="", $foto="", $correo="", $telefono="", $clave="", $descripcion="") {
+    private $disponibilidad;
+
+
+    public function __construct($id = "", $nombre = "", $apellido = "", $foto = "", $correo = "", $telefono = "", $clave = "", $descripcion = "", $disponibilidad = "")
+    {
         parent::__construct($id, $nombre, $apellido, $foto, $correo, $telefono, $clave);
-        $this->descripcion= $descripcion;
-    }
-    
-    public function getDescripcion(){
-        return $this -> descripcion;
+        $this->descripcion = $descripcion;
+        $this->disponibilidad = $disponibilidad;
     }
 
-    
-    public function autenticar() {
+
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    public function getDisponibilidad()
+    {
+        return $this->disponibilidad;
+    }
+
+
+
+    public function autenticar()
+    {
         $conexion = new Conexion();
-        $paseadorDAO = new PaseadorDAO("", "", "","",$this->correo, "", $this->clave);
+        $paseadorDAO = new PaseadorDAO("", "", "", "", $this->correo, "", $this->clave);
         $conexion->abrir();
         $conexion->ejecutar($paseadorDAO->autenticar());
-        if($conexion->filas() == 1) {
+        if ($conexion->filas() == 1) {
             $this->id = $conexion->registro()[0];
             $conexion->cerrar();
             return true;
@@ -30,8 +44,9 @@ class Paseador extends Persona {
             return false;
         }
     }
-    
-    public function consultar() {
+
+    public function consultar()
+    {
         $conexion = new Conexion();
         $paseadorDAO = new PaseadorDAO($this->id);
         $conexion->abrir();
@@ -43,22 +58,24 @@ class Paseador extends Persona {
         $this->foto = $datos[3];
         $conexion->cerrar();
     }
-    
-    public function consultarTodos() {
+
+    public function consultarTodos()
+    {
         $conexion = new Conexion();
         $paseadorDAO = new PaseadorDAO();
         $conexion->abrir();
         $conexion->ejecutar($paseadorDAO->consultarTodos());
         $paseadores = array();
-        while($datos = $conexion->registro()) {
-            $paseador = new Paseador($datos[0], $datos[1], "",$datos[2], $datos[3], $datos[4]);
+        while ($datos = $conexion->registro()) {
+            $paseador = new Paseador($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5], "", $datos[6], $datos[7]);
             array_push($paseadores, $paseador);
         }
         $conexion->cerrar();
         return $paseadores;
     }
 
-    public function crear() {
+    public function crear()
+    {
         $conexion = new Conexion();
         $paseadorDAO = new PaseadorDAO(
             $this->id,
@@ -68,36 +85,35 @@ class Paseador extends Persona {
             $this->correo,
             $this->telefono,
             $this->clave
-            );
-        
+        );
+
         $conexion->abrir();
 
-        try{
+        try {
             $conexion->ejecutar("SELECT idPaseador FROM paseador WHERE idPaseador = '" . $this->id . "'");
-            if($conexion->filas() > 0) {
+            if ($conexion->filas() > 0) {
                 $conexion->cerrar();
                 throw new Exception("El ID del paseador ya existe");
             }
 
             $conexion->ejecutar("SELECT idPaseador FROM paseador WHERE correo = '" . $this->correo . "'");
-            if($conexion->filas() > 0) {
+            if ($conexion->filas() > 0) {
                 $conexion->cerrar();
                 throw new Exception("El correo electrónico ya está registrado");
             }
             $conexion->ejecutar($paseadorDAO->crear());
             $resultado = true;
-
-        }catch(Exception){
+        } catch (Exception) {
             $resultado = false;
-
-        }finally{
+        } finally {
             $conexion->cerrar();
         }
 
         return $resultado;
     }
 
-    public function actualizar() {
+    public function actualizar()
+    {
         $conexion = new Conexion();
         $paseadorDAO = new PaseadorDAO(
             $this->id,
@@ -106,72 +122,41 @@ class Paseador extends Persona {
             $this->foto,
             $this->correo,
             $this->telefono
-            );
-        
+        );
+
         $conexion->abrir();
 
-        try{
+        try {
             $conexion->ejecutar("SELECT idPaseador FROM paseador WHERE correo = '" . $this->correo . "' AND idPaseador != '" . $this->id . "'");
-            if($conexion->filas() > 0) {
+            if ($conexion->filas() > 0) {
                 $conexion->cerrar();
                 throw new Exception("El correo electrónico ya está registrado en otro paseador");
             }
             $conexion->ejecutar($paseadorDAO->actualizar());
             $resultado = true;
-
-        }catch(Exception){
+        } catch (Exception) {
             $resultado = false;
-
-        }finally{
+        } finally {
             $conexion->cerrar();
-
         }
         return $resultado;
     }
-    
-    public function actualizarClave($nuevaClave) {
+
+    public function actualizarClave($nuevaClave)
+    {
         $conexion = new Conexion();
         $paseadorDAO = new PaseadorDAO($this->id, "", "", $nuevaClave);
-        
+
         $conexion->abrir();
 
-        try{
+        try {
             $conexion->ejecutar($paseadorDAO->actualizarClave());
             $resultado = true;
-
-        }catch(Exception){
+        } catch (Exception) {
             $resultado = false;
-
-        }finally{
+        } finally {
             $conexion->cerrar();
         }
-        return $resultado;
-    }
-
-    public function eliminar() {
-        $conexion = new Conexion();
-        $paseadorDAO = new PaseadorDAO($this->id);
-        
-        $conexion->abrir();
-        
-        try{
-            $conexion->ejecutar("SELECT foto FROM paseador WHERE idPaseador = '" . $this->id . "'");
-            $foto = $conexion->registro()[0];
-            
-            $conexion->ejecutar($paseadorDAO->eliminar());
-            $resultado = true;
-
-        }catch(Exeption){
-            $resultado = false;
-
-        }finally{
-            $conexion->cerrar();
-        }
-        if($resultado && $foto != 'img/default-profile.png' && file_exists($foto)) {
-                unlink($foto); 
-            }
-        
         return $resultado;
     }
 }
-?>

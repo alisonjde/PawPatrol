@@ -17,18 +17,19 @@ INSERT INTO `dueño` (`idDueño`, `nombre`, `apellido`, `foto`, `correo`, `telef
 (9, 'Laura', 'Molina', NULL, 'laura@example.com', '3009012345', MD5('laura369')),
 (10, 'Ricardo', 'Herrera', NULL, 'ricardo@example.com', '3000123456', MD5('ricardo741'));
 
--- Insertar datos en paseador (10)
+-- Insertar datos en paseador (10 actualizados)
 INSERT INTO `paseador` (`idPaseador`, `nombre`, `apellido`, `foto`, `descripcion`, `disponibilidad`, `correo`, `telefono`, `clave`) VALUES
-(1, 'Juan', 'Perez', 'foto1.jpg', 'Amante de perros', 'Lunes a Viernes', 'juan@example.com', '3101234567', MD5('juan123')),
-(2, 'Laura', 'Gonzalez', 'foto2.jpg', 'Experta en paseos largos', 'Fines de semana', 'laura@example.com', '3102345678', MD5('laura456')),
-(3, 'Pedro', 'Martinez', 'foto3.jpg', 'Cuidadoso y responsable', 'Lunes a Domingo', 'pedro@example.com', '3103456789', MD5('pedro789')),
-(4, 'Ana', 'Ramirez', 'foto4.jpg', 'Amante de los animales', 'Martes a Sábado', 'ana@example.com', '3104567890', MD5('ana321')),
-(5, 'Luis', 'Hernandez', 'foto5.jpg', 'Paseos personalizados', 'Lunes a Viernes', 'luis@example.com', '3105678901', MD5('luis654')),
-(6, 'Maria', 'Santos', 'foto6.jpg', 'Especialista en perros grandes', 'Fines de semana', 'maria@example.com', '3106789012', MD5('maria987')),
-(7, 'Carlos', 'Diaz', 'foto7.jpg', 'Gran experiencia', 'Lunes a Domingo', 'carlos@example.com', '3107890123', MD5('carlos147')),
-(8, 'Sofia', 'Lopez', 'foto8.jpg', 'Paseos seguros', 'Martes a Sábado', 'sofia@example.com', '3108901234', MD5('sofia258')),
-(9, 'Jorge', 'Ruiz', 'foto9.jpg', 'Cuidadoso y puntual', 'Lunes a Viernes', 'jorge@example.com', '3109012345', MD5('jorge369')),
-(10, 'Elena', 'Vargas', 'foto10.jpg', 'Amante de mascotas', 'Fines de semana', 'elena@example.com', '3100123456', MD5('elena741'));
+(1, 'Laura', 'Mejía', 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg', 'Amante de los perros', 'Lunes a Viernes', 'laura@correo.com', '3001234567', MD5('clave1')),
+(2, 'Carlos', 'Torres', 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg', 'Experto en razas grandes', 'Fines de semana', 'carlos@correo.com', '3002345678', MD5('clave2')),
+(3, 'Ana', 'Martínez', 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg', 'Paseadora paciente', 'Lunes a Sábado', 'ana@correo.com', '3003456789', MD5('clave3')),
+(4, 'Diego', 'Ruiz', 'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg', 'Entrenador y paseador', 'Martes y Jueves', 'diego@correo.com', '3004567890', MD5('clave4')),
+(5, 'María', 'Gómez', 'https://images.pexels.com/photos/871495/pexels-photo-871495.jpeg', 'Con experiencia en cachorros', 'Lunes a Viernes', 'maria@correo.com', '3005678901', MD5('clave5')),
+(6, 'Andrés', 'Pérez', 'https://images.pexels.com/photos/1172060/pexels-photo-1172060.jpeg', 'Responsable y puntual', 'Fines de semana', 'andres@correo.com', '3006789012', MD5('clave6')),
+(7, 'Paula', 'Rodríguez', 'https://images.pexels.com/photos/8770186/pexels-photo-8770186.jpeg', 'Adora los animales', 'Todos los días', 'paula@correo.com', '3007890123', MD5('clave7')),
+(8, 'Felipe', 'Morales', 'https://images.pexels.com/photos/5745236/pexels-photo-5745236.jpeg', 'Atento y cuidadoso', 'Lunes a Miércoles', 'felipe@correo.com', '3008901234', MD5('clave8')),
+(9, 'Natalia', 'Ramírez', 'https://images.pexels.com/photos/18087237/pexels-photo-18087237.jpeg', 'Buena con perros ansiosos', 'Martes a Sábado', 'natalia@correo.com', '3009012345', MD5('clave9')),
+(10, 'Santiago', 'López', 'https://images.pexels.com/photos/2958113/pexels-photo-2958113.jpeg', 'Gran energía y carisma', 'Lunes a Viernes', 'santiago@correo.com', '3010123456', MD5('clave10'));
+
 
 -- Insertar datos en perro (10)
 INSERT INTO `perro` (`idPerro`, `nombre`, `foto`, `tamaño_idTamaño`, `dueño_idDueño`) VALUES
