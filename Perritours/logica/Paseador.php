@@ -84,7 +84,9 @@ class Paseador extends Persona
             $this->foto,
             $this->correo,
             $this->telefono,
-            $this->clave
+            $this->clave,
+            $this->descripcion,
+            $this->disponibilidad
         );
 
         $conexion->abrir();
@@ -92,15 +94,14 @@ class Paseador extends Persona
         try {
             $conexion->ejecutar("SELECT idPaseador FROM paseador WHERE idPaseador = '" . $this->id . "'");
             if ($conexion->filas() > 0) {
-                $conexion->cerrar();
                 throw new Exception("El ID del paseador ya existe");
             }
 
             $conexion->ejecutar("SELECT idPaseador FROM paseador WHERE correo = '" . $this->correo . "'");
             if ($conexion->filas() > 0) {
-                $conexion->cerrar();
                 throw new Exception("El correo electrónico ya está registrado");
             }
+
             $conexion->ejecutar($paseadorDAO->crear());
             $resultado = true;
         } catch (Exception) {
@@ -111,6 +112,7 @@ class Paseador extends Persona
 
         return $resultado;
     }
+
 
     public function actualizar()
     {
@@ -158,5 +160,30 @@ class Paseador extends Persona
             $conexion->cerrar();
         }
         return $resultado;
+    }
+
+    public function buscar($filtro)
+    {
+        $conexion = new Conexion();
+        $paseadorDAO = new PaseadorDAO();
+        $conexion->abrir();
+        $conexion->ejecutar($paseadorDAO->buscar($filtro));
+        $paseadores = array();
+        while ($datos = $conexion->registro()) {
+            $paseador = new Paseador(
+                $datos[0], // id
+                $datos[1], // nombre
+                $datos[2], // apellido
+                $datos[3], // foto
+                $datos[4], // correo
+                $datos[5], // telefono
+                "",        // clave
+                $datos[6], // descripcion
+                $datos[7]  // disponibilidad
+            );
+            array_push($paseadores, $paseador);
+        }
+        $conexion->cerrar();
+        return $paseadores;
     }
 }

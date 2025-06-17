@@ -7,7 +7,8 @@ if(isset($_GET["sesion"])) {
 $error = false;
 if(isset($_POST["autenticar"])) {
     $correo = $_POST["correo"];
-    $clave = $_POST["clave"];
+    $clave = md5($_POST["clave"]);
+
     
     $admin = new Admin("", "", "", "", $correo, "", $clave);
     if($admin->autenticar()) {

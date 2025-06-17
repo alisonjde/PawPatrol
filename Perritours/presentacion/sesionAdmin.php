@@ -4,10 +4,11 @@ if ($_SESSION["rol"] != "admin") {
     exit();
 }
 ?>
+
 <body>
     <?php
-    include ("presentacion/fondo.php");
-    include ("presentacion/boton.php");
+    include("presentacion/fondo.php");
+    include("presentacion/boton.php");
     include("presentacion/admin/menuAdmin.php");
     $id = $_SESSION["id"];
     $admin = new Admin($id);
@@ -16,8 +17,12 @@ if ($_SESSION["rol"] != "admin") {
     <div class="text-center py-3 hero-text">
         <div class="container glass py-3">
             <h1 class="display-6">¡Hola, <?php echo $admin->getNombre() ?>!</h1>
-            <img src="https://cdn-icons-png.freepik.com/512/10813/10813375.png" class="rounded-circle"
-                style="width: 100%; max-width: 150px;" alt="Usuario">
+            <?php echo "<p style='color: yellow;'>Ruta de la imagen: " . $admin->getFoto() . "</p>"; ?>
+
+            <img src="<?php echo $admin->getFoto(); ?>"
+                class="rounded-circle"
+                style="width: 100%; max-width: 150px;"
+                alt="Foto de <?php echo $admin->getNombre(); ?>">
 
             <div class="card m-3 mx-auto" style="max-width: 40rem; background-color: transparent; border: 3px solid blueviolet;">
                 <div style="border-bottom: 2px dashed blueviolet;" class="card-header display-6 text-light">
@@ -32,4 +37,4 @@ if ($_SESSION["rol"] != "admin") {
             </div>
         </div>
     </div>
-</body> 
+</body>

@@ -30,7 +30,7 @@ class PaseadorDAO
     {
         return "SELECT idPaseador
                 FROM paseador
-                WHERE correo = '" . $this->correo . "' AND clave = '" . md5($this->clave) . "'";
+                WHERE correo = '" . $this->correo . "' AND clave = '" . $this->clave . "'";
     }
 
     public function consultar()
@@ -50,15 +50,20 @@ class PaseadorDAO
 
     public function crear()
     {
-        return "INSERT INTO paseador (idPaseador, nombre, apellido, foto, correo, telefono , clave)
-            VALUES ('" . $this->id . "',
-                    '" . $this->nombre . "',
-                    '" . $this->apellido . "',
-                    '" . $this->foto . "',
-                    '" . $this->correo . "',
-                    '" . $this->telefono . "',
-                    " . md5($this->clave) . ")";
+        return "INSERT INTO paseador 
+    (idPaseador, nombre, apellido, foto, correo, telefono, clave, descripcion, disponibilidad)
+    VALUES 
+    ('" . $this->id . "',
+     '" . $this->nombre . "',
+     '" . $this->apellido . "',
+     '" . $this->foto . "',
+     '" . $this->correo . "',
+     '" . $this->telefono . "',
+     '" . $this->clave . "',
+     '" . $this->descripcion . "',
+     '" . $this->disponibilidad . "')";
     }
+
 
     public function actualizar()
     {
@@ -82,5 +87,33 @@ class PaseadorDAO
     public function eliminar()
     {
         return "DELETE FROM paseador WHERE idPaseador = '" . $this->id . "'";
+    }
+
+
+    public function buscar($filtro)
+    {
+        $palabras = array_filter(explode(" ", trim($filtro)));
+
+
+        $condiciones = [];
+        foreach ($palabras as $palabra) {
+            $palabra = trim($palabra);
+            $condiciones[] = "(nombre LIKE '%$palabra%' 
+                          OR apellido LIKE '%$palabra%' 
+                          OR correo LIKE '%$palabra%' 
+                          OR telefono LIKE '%$palabra%' 
+                          OR disponibilidad LIKE '%$palabra%')";
+        }
+
+
+        $where = count($condiciones) > 0 ? "WHERE " . implode(" AND ", $condiciones) : "";
+
+
+        $sql = "SELECT idPaseador, nombre, apellido, foto, correo, telefono, descripcion, disponibilidad 
+            FROM paseador
+            $where
+            ORDER BY nombre ASC";
+
+        return $sql;
     }
 }

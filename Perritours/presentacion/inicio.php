@@ -6,9 +6,8 @@
   $paseador = new Paseador();
   $listaPaseadores = $paseador->consultarTodos();
   $cantidad = count($listaPaseadores);
-
-
   ?>
+
   <style>
     .card-img-top {
       margin: 10px;
@@ -28,11 +27,9 @@
     </div>
   </section>
 
-  <!-- carrusel -->
+  <!-- CARRUSEL -->
   <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-
-      <!-- primero-->
       <div class="carousel-item active">
         <div class="container-xl py-5">
           <div class="row align-items-center">
@@ -47,27 +44,6 @@
         </div>
       </div>
 
-      <!-- segundo
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="imagenes/slide2.jpg" class="d-block w-100" alt="Pagos seguros">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Pagos seguros</h5>
-          <p>Transacciones electrónicas fáciles y confiables</p>
-        </div>
-      </div>-->
-
-      <!-- tercero
-      <div class="carousel-item">
-        <img src="imagenes/slide3.jpg" class="d-block w-100" alt="Control total">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Control total</h5>
-          <p>Monitorea los paseos y recibe reportes completos</p>
-        </div>
-      </div>-->
-
-
-
-      <!-- quinto -->
       <div class="carousel-item">
         <div class="container-xl py-5">
           <div class="row align-items-center">
@@ -87,7 +63,6 @@
         </div>
       </div>
 
-      <!-- sexto -->
       <div class="carousel-item">
         <div class="container-xl py-5">
           <div class="row align-items-center">
@@ -101,10 +76,8 @@
           </div>
         </div>
       </div>
-
     </div>
 
-    <!-- Controles -->
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Anterior</span>
@@ -115,44 +88,43 @@
     </button>
   </div>
 
-
-
-
+  
   <div class="container">
     <h2 class="section-title text-center mb-4">Nuestros Paseadores</h2>
-    <div class="row">
+
+
+    <div class="mb-4 text-center">
+      <input type="text" id="filtro" class="form-control w-50 mx-auto" placeholder="Buscar paseador por nombre, correo o teléfono...">
+    </div>
+
+    
+    <div class="row" id="resultados">
       <?php
       for ($i = 0; $i < $cantidad; $i++) {
         $p = $listaPaseadores[$i];
-        $link = "#"; 
-
+        $link = "#";
         echo '
-      <div class="col-md-4 mb-4">
-        <a href="' . $link . '" class="text-decoration-none text-dark">
-          <div class="card h-100 shadow">
-            <img src="' . $p->getFoto() . '" class="card-img-top" alt="Foto de ' . $p->getNombre() . '">
-            <div class="card-body">
-              <h5 class="card-title">' . $p->getNombre() . ' ' . $p->getApellido() . '</h5>
-              <p class="card-text"><strong>Correo:</strong> ' . $p->getCorreo() . '</p>
-              <p class="card-text"><strong>Teléfono:</strong> ' . $p->getTelefono() . '</p>
-              <p class="card-text"><strong>Descripción:</strong> ' . $p->getDescripcion() . '</p>
-              <p class="card-text"><strong>Disponibilidad:</strong> ' . $p->getDisponibilidad() . '</p>
+        <div class="col-md-4 mb-4">
+          <a href="' . $link . '" class="text-decoration-none text-dark">
+            <div class="card h-100 shadow">
+              <img src="' . $p->getFoto() . '" class="card-img-top" alt="Foto de ' . $p->getNombre() . '">
+              <div class="card-body">
+                <h5 class="card-title">' . $p->getNombre() . ' ' . $p->getApellido() . '</h5>
+                <p class="card-text"><strong>Correo:</strong> ' . $p->getCorreo() . '</p>
+                <p class="card-text"><strong>Teléfono:</strong> ' . $p->getTelefono() . '</p>
+                <p class="card-text"><strong>Descripción:</strong> ' . $p->getDescripcion() . '</p>
+                <p class="card-text"><strong>Disponibilidad:</strong> ' . $p->getDisponibilidad() . '</p>
+              </div>
             </div>
-          </div>
-        </a>
-      </div>';
+          </a>
+        </div>';
       }
       ?>
     </div>
   </div>
 
-
-
-
-
-
   <!-- FOOTER -->
-  <footer class="text-center">
+  <footer class="text-center mt-5">
     <div class="container-xl">
       <div class="row mb-3">
         <div class="col-md-4">
@@ -173,4 +145,18 @@
       <p class="small">&copy; 2025 Perritours. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+  
+  
+  <script>
+    $(document).ready(function () {
+      $("#filtro").keyup(function () {
+        var texto = $("#filtro").val().trim();
+        if (texto.length === 0 || texto.length > 2) {
+          var ruta = "buscarPaseadorAjax.php?filtro=" + encodeURIComponent(texto);
+          $("#resultados").load(ruta);
+        }
+      });
+    });
+  </script>
 </body>
