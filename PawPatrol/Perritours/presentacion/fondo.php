@@ -2,43 +2,42 @@
   body {
     background: url('imagenes/fondo.png') no-repeat center center fixed;
     background-size: cover;
-    color: #e5def5;
+    color: rgb(0, 0, 0);
     font-family: 'Segoe UI', sans-serif;
+
+
   }
 
+  .card-img-top {
+    margin: 10px;
+    width: calc(100% - 20px);
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+
   .glass {
-    background: rgba(20, 3, 18, 0.7);
+    background: rgba(52, 128, 35, 0.7);
     border-radius: 20px;
     backdrop-filter: blur(8px);
     padding: 2rem;
   }
 
   .navbar {
-    background-color: rgba(0, 0, 20, 0.85);
+    background-color: rgb(90, 179, 90);
   }
 
-  .hero-text {
-    padding-top: 7rem;
-    padding-bottom: 5rem;
-  }
+  
 
   .btn-primary {
-    background-color: #8e2ab2;
+    background-color:rgb(81, 178, 42);
     border: none;
   }
 
-  .btn-primary:hover {
-    background-color: #5c0a63;
-  }
-
-  .section-title {
-    font-weight: bold;
-    color: #c5f5dc;
-    margin-bottom: 1.5rem;
-  }
-
+  
   footer {
-    background-color: rgba(10, 10, 30, 0.95);
+    background-color: rgb(90, 179, 90);
     color: #ccc;
     padding: 2rem 0;
   }
@@ -62,15 +61,19 @@
     object-fit: cover;
   }
 
-  .btn-custom {
-    border-color: blueviolet;
-    color: blueviolet;
-    background-color: transparent;
-    transition: all 0.3s ease;
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color:rgb(85, 178, 42);
+   
+    border-radius: 50%;
+    padding: 1.2rem;
+    background-size: 100% 100%;
+    filter: none;
   }
 
-  .btn-custom:hover {
-    background-color: blueviolet;
-    color: white;
+  .carousel-control-prev:hover .carousel-control-prev-icon,
+  .carousel-control-next:hover .carousel-control-next-icon {
+    background-color:rgb(20, 99, 10);
+    
   }
 </style>

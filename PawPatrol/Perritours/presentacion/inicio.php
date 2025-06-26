@@ -8,24 +8,6 @@
   $cantidad = count($listaPaseadores);
   ?>
 
-  <style>
-    .card-img-top {
-      margin: 10px;
-      width: calc(100% - 20px);
-      height: 250px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-  </style>
-
-  <!-- HERO SECTION -->
-  <section class="text-center hero-text">
-    <div class="container-xl glass">
-      <h1 class="display-4">¡Paseos felices, dueños tranquilos!</h1>
-      <p class="lead">Con Perritours, puedes agendar paseos seguros, pagar con confianza y hacer feliz a tu mascota.</p>
-      <a href="?pid=<?php echo base64_encode("presentacion/autenticar.php") ?>" class="btn btn-primary btn-lg mt-3">Ingresa</a>
-    </div>
-  </section>
 
   <!-- CARRUSEL -->
   <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
@@ -48,7 +30,7 @@
         <div class="container-xl py-5">
           <div class="row align-items-center">
             <div class="col-md-6 text-center">
-              <img src="imagenes/servicios.png" class="img-fluid" alt="Servicios">
+              <img src="imagenes/servicios2.png" class="img-fluid" alt="Servicios">
             </div>
             <div class="col-md-6">
               <h2 class="section-title">Nuestros Servicios</h2>
