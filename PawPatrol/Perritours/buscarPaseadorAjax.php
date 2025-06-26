@@ -46,7 +46,7 @@ if (count($paseadores) > 0) {
                 <h5 class="card-title">' . $nombre . " " . $apellido . '</h5>
                 <p class="card-text"><strong>Correo:</strong> ' . $correo . '</p>
                 <p class="card-text"><strong>Teléfono:</strong> ' . $telefono . '</p>
-                <p class="card-text"><strong>Descripción:</strong> ' . resaltarCoincidencias($pas->getDescripcion(), $filtro) . '</p>
+                <p class="card-text"><strong>Descripción:</strong> ' . $pas->getDescripcion() . '</p>
 
               </div>
             </div>
@@ -57,14 +57,3 @@ if (count($paseadores) > 0) {
     echo "<div class='alert alert-warning text-center w-100' role='alert'>No se encontraron paseadores.</div>";
 }
 
-
-function resaltarCoincidencias($texto, $filtro)
-{
-    $palabras = explode(" ", trim($filtro));
-    foreach ($palabras as $palabra) {
-        if (stripos($texto, $palabra) !== false) {
-            $texto = preg_replace("/(" . preg_quote($palabra, '/') . ")/i", "<strong>$1</strong>", $texto);
-        }
-    }
-    return $texto;
-}
