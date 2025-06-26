@@ -28,10 +28,9 @@ class PaseadorDAO
 
     public function autenticar()
     {
-        return "SELECT idPaseador
-                FROM paseador
-                WHERE correo = '" . $this->correo . "' AND clave = '" . $this->clave . "'";
+        return "SELECT idPaseador FROM paseador WHERE correo = '" . $this->correo . "' AND clave = '" . md5($this->clave) . "'";
     }
+
 
     public function consultar()
     {
@@ -116,18 +115,18 @@ class PaseadorDAO
         return $sql;
     }
 
-    public function modificar($filtros){
+    public function modificar($filtros)
+    {
         $condiciones = [];
-        foreach ($filtros as $filtro){
+        foreach ($filtros as $filtro) {
             $condiciones[] = "(nombre LIKE '%$filtro%' OR apellido LIKE '%$filtro%' OR correo LIKE '%$filtro%' OR telefono LIKE '%$filtro%')";
         }
 
-        $consulta = implode("AND",$condiciones);
+        $consulta = implode("AND", $condiciones);
 
         $sentencia = "SELECT idPaseador, nombre, apellido, foto, correo, telefono
                 FROM paseador
                 WHERE $consulta";
         return $sentencia;
-
     }
 }

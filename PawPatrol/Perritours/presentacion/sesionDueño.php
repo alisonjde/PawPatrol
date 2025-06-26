@@ -26,8 +26,8 @@ if ($_SESSION["rol"] != "dueño") {
                 alt="Foto de <?php echo $dueño->getNombre(); ?>">
 
 
-            <div class="card m-3 mx-auto" style="max-width: 40rem; background-color: transparent; border: 3px solid blueviolet;">
-                <div style="border-bottom: 2px dashed blueviolet;" class="card-header display-6 text-light">
+            <div class="card m-3 mx-auto" style="max-width: 40rem; background-color: transparent; border: 3px solid black;">
+                <div style="border-bottom: 2px dashed black;" class="card-header display-6 text-light">
                     Información
                 </div>
                 <div class="card-body text-light">
@@ -35,7 +35,7 @@ if ($_SESSION["rol"] != "dueño") {
                     <p class="lead"><strong>Telefono: </strong><?php echo $dueño->getTelefono() ?></p>
                     <p class="lead"><strong>Correo: </strong><?php echo $dueño->getCorreo() ?></p>
                     <p class="lead "><strong>Perritos registrados: </strong><?php echo $perro->consultarCantidad() ?></p>
-                    <p class="lead" style="color: blueviolet">Para mas informacion consulta en la opción <i>Paseos</i></p>
+                    <p class="lead" style="color: black">Para mas informacion consulta en la opción <i>Paseos</i></p>
                 </div>
             </div>
         </div>

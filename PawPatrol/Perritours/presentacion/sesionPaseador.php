@@ -24,8 +24,8 @@ if ($_SESSION["rol"] != "paseador") {
                 style="width: 100%; max-width: 150px;"
                 alt="Foto de <?php echo $paseador->getNombre(); ?>">
 
-            <div class="card m-3 mx-auto" style="max-width: 40rem; background-color: transparent; border: 3px solid blueviolet;">
-                <div style="border-bottom: 2px dashed blueviolet;" class="card-header display-6 text-light">
+            <div class="card m-3 mx-auto" style="max-width: 40rem; background-color: transparent; border: 3px solid black;">
+                <div style="border-bottom: 2px dashed black;" class="card-header display-6 text-light">
                     Información
                 </div>
                 <div class="card-body text-light">
@@ -33,7 +33,7 @@ if ($_SESSION["rol"] != "paseador") {
                     <p class="lead"><strong>Telefono: </strong><?php echo $paseador->getTelefono() ?></p>
                     <p class="lead"><strong>Correo: </strong><?php echo $paseador->getCorreo() ?></p>
                     <p class="lead "><strong>Paseos pendientes: </strong><?php echo $paseo->consultarPendiente() ?></p>
-                    <p class="lead" style="color: blueviolet">Para mas informacion consulta en la opción <i>Paseos</i>.</p>
+                    <p class="lead" >Para mas informacion consulta en la opción <i>Paseos</i>.</p>
                     <a href="#" class="btn btn-custom" type="submit">Modificar información</a>
                 </div>
             </div>

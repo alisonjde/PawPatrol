@@ -1,9 +1,9 @@
- <?php
+<?php
   include("presentacion/fondo.php");
-  ?>
+?>
 
 <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
+    <div class="container">
 
         <a class="navbar-brand fs-4" href="?pid=<?php echo base64_encode("presentacion/inicio.php") ?>">🐾 Perritours</a>
 

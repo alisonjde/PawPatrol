@@ -20,7 +20,7 @@ class AdminDAO {
     }
     
     public function autenticar() {
-        return "SELECT idDueño
+        return "SELECT idAdmin
                 FROM admin
                 WHERE correo = '" . $this->correo . "' AND clave = '" . md5($this->clave) . "'";
     }

@@ -76,4 +76,17 @@
     background-color:rgb(20, 99, 10);
     
   }
+
+   
+  .dropdown-menu {
+    background-color:rgb(48, 48, 48);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0;
+    min-width: 200px;
+  }
+
+  .dropdown-item:hover {
+    background-color:rgb(90, 179, 90) !important;
+    color: #ffffff !important;
+  }
 </style>
