@@ -162,31 +162,7 @@ class Paseador extends Persona
         return $resultado;
     }
 
-    public function buscar($filtro)
-    {
-        $conexion = new Conexion();
-        $paseadorDAO = new PaseadorDAO();
-        $conexion->abrir();
-        $conexion->ejecutar($paseadorDAO->buscar($filtro));
-        $paseadores = array();
-        while ($datos = $conexion->registro()) {
-            $paseador = new Paseador(
-                $datos[0], // id
-                $datos[1], // nombre
-                $datos[2], // apellido
-                $datos[3], // foto
-                $datos[4], // correo
-                $datos[5], // telefono
-                "",        // clave
-                $datos[6], // descripcion
-                
-            );
-            array_push($paseadores, $paseador);
-        }
-        $conexion->cerrar();
-        return $paseadores;
-    }
-
+   
     public function modificar($filtros)
     {
         $conexion = new Conexion();

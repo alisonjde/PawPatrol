@@ -1,27 +1,52 @@
 <?php
+require("logica/Persona.php");
 require("logica/Paseador.php");
 
-$filtro = isset($_GET['filtro']) ? trim($_GET['filtro']) : '';
-
+$filtro = $_GET["filtro"];
+$filtros = explode(" ", $filtro);
 
 $paseador = new Paseador();
-$paseadores = $paseador->buscar($filtro);
+$paseadores = $paseador->modificar($filtros);
 
-$resultados = [];
+
 
 
 if (count($paseadores) > 0) {
-    foreach ($paseadores as $p) {
+    foreach ($paseadores as $pas) {
+      
+        $nombre = $pas->getNombre();
+        $apellido = $pas->getApellido();
+        $correo = $pas->getCorreo();
+        $telefono = $pas->getTelefono();
+
+        $patron = '/(' . implode('|', $filtros) . ')/i';
+
+        $nombre = preg_replace_callback($patron, function ($coincidencias) {
+            return "<strong>" . $coincidencias[0] . "</strong>";
+        }, $nombre);
+
+        $apellido = preg_replace_callback($patron, function ($coincidencias) {
+            return "<strong>" . $coincidencias[0] . "</strong>";
+        }, $apellido);
+
+        $correo = preg_replace_callback($patron, function ($coincidencias) {
+            return "<strong>" . $coincidencias[0] . "</strong>";
+        }, $correo);
+
+        $telefono = preg_replace_callback($patron, function ($coincidencias) {
+            return "<strong>" . $coincidencias[0] . "</strong>";
+        }, $telefono);
+
         echo '
         <div class="col-md-4 mb-4">
           <a href="#" class="text-decoration-none text-dark">
             <div class="card h-100 shadow">
-              <img src="' . $p->getFoto() . '" class="card-img-top" alt="Foto de ' . $p->getNombre() . '">
+              <img src="' . $pas->getFoto() . '" class="card-img-top" alt="Foto de ' . $pas->getNombre() . '">
               <div class="card-body">
-                <h5 class="card-title">' . resaltarCoincidencias($p->getNombre() . ' ' . $p->getApellido(), $filtro) . '</h5>
-                <p class="card-text"><strong>Correo:</strong> ' . resaltarCoincidencias($p->getCorreo(), $filtro) . '</p>
-                <p class="card-text"><strong>Teléfono:</strong> ' . resaltarCoincidencias($p->getTelefono(), $filtro) . '</p>
-                <p class="card-text"><strong>Descripción:</strong> ' . resaltarCoincidencias($p->getDescripcion(), $filtro) . '</p>
+                <h5 class="card-title">' . $nombre . " " . $apellido . '</h5>
+                <p class="card-text"><strong>Correo:</strong> ' . $correo . '</p>
+                <p class="card-text"><strong>Teléfono:</strong> ' . $telefono . '</p>
+                <p class="card-text"><strong>Descripción:</strong> ' . resaltarCoincidencias($pas->getDescripcion(), $filtro) . '</p>
 
               </div>
             </div>

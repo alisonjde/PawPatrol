@@ -89,32 +89,7 @@ class PaseadorDAO
     }
 
 
-    public function buscar($filtro)
-    {
-        $palabras = array_filter(explode(" ", trim($filtro)));
-
-
-        $condiciones = [];
-        foreach ($palabras as $palabra) {
-            $palabra = trim($palabra);
-            $condiciones[] = "(nombre LIKE '%$palabra%' 
-                          OR apellido LIKE '%$palabra%' 
-                          OR correo LIKE '%$palabra%'
-                          OR telefono LIKE '%$palabra%')";
-        }
-
-
-        $where = count($condiciones) > 0 ? "WHERE " . implode(" AND ", $condiciones) : "";
-
-
-        $sql = "SELECT idPaseador, nombre, apellido, foto, correo, telefono, descripcion
-            FROM paseador
-            $where
-            ORDER BY nombre ASC";
-
-        return $sql;
-    }
-
+   
     public function modificar($filtros)
     {
         $condiciones = [];
