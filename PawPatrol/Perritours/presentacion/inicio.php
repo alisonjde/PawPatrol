@@ -70,7 +70,7 @@
     </button>
   </div>
 
-  
+
   <div class="container">
     <h2 class="section-title text-center mb-4">Nuestros Paseadores</h2>
 
@@ -79,7 +79,7 @@
       <input type="text" id="filtro" class="form-control w-50 mx-auto" placeholder="Buscar paseador por nombre, correo o teléfono...">
     </div>
 
-    
+
     <div class="row" id="resultados">
       <?php
       for ($i = 0; $i < $cantidad; $i++) {
@@ -89,7 +89,8 @@
         <div class="col-md-4 mb-4">
           <a href="' . $link . '" class="text-decoration-none text-dark">
             <div class="card h-100 shadow">
-              <img src="' . $p->getFoto() . '" class="card-img-top" alt="Foto de ' . $p->getNombre() . '">
+              <img src="' . $p->getFoto() . '" class="card-img-top" alt="Foto de ' . $p->getNombre() . '" onerror="this.src=\'img/default-profile.png\'">
+
               <div class="card-body">
                 <h5 class="card-title">' . $p->getNombre() . ' ' . $p->getApellido() . '</h5>
                 <p class="card-text"><strong>Correo:</strong> ' . $p->getCorreo() . '</p>
@@ -127,11 +128,11 @@
     </div>
   </footer>
 
-  
-  
+
+
   <script>
-    $(document).ready(function () {
-      $("#filtro").keyup(function () {
+    $(document).ready(function() {
+      $("#filtro").keyup(function() {
         var texto = $("#filtro").val().trim();
         if (texto.length === 0 || texto.length > 2) {
           var ruta = "buscarPaseadorAjax.php?filtro=" + encodeURIComponent(texto);

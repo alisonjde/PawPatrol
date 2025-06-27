@@ -28,14 +28,14 @@
     background-color: rgb(90, 179, 90);
   }
 
-  
+
 
   .btn-primary {
-    background-color:rgb(81, 178, 42);
+    background-color: rgb(81, 178, 42);
     border: none;
   }
 
-  
+
   footer {
     background-color: rgb(90, 179, 90);
     color: #ccc;
@@ -61,10 +61,11 @@
     object-fit: cover;
   }
 
+  /* Carrusel */
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
-    background-color:rgb(85, 178, 42);
-   
+    background-color: rgb(85, 178, 42);
+
     border-radius: 50%;
     padding: 1.2rem;
     background-size: 100% 100%;
@@ -73,20 +74,49 @@
 
   .carousel-control-prev:hover .carousel-control-prev-icon,
   .carousel-control-next:hover .carousel-control-next-icon {
-    background-color:rgb(20, 99, 10);
-    
+    background-color: rgb(20, 99, 10);
+
   }
 
-   
+  /* Menus */
   .dropdown-menu {
-    background-color:rgb(48, 48, 48);
+    background-color: rgb(48, 48, 48);
     border-radius: 0.5rem;
     padding: 0.5rem 0;
     min-width: 200px;
   }
 
   .dropdown-item:hover {
-    background-color:rgb(90, 179, 90) !important;
+    background-color: rgb(90, 179, 90) !important;
     color: #ffffff !important;
+  }
+
+
+  /* Tablas mostrar datos*/
+
+  .table-custom th {
+    background-color: rgb(129, 240, 129);
+    color: rgb(0, 0, 0);
+    border-bottom: 2px rgb(233, 132, 0);
+    text-align: center;
+  }
+
+  .table-custom td {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-top: 1px solidrgb(255, 136, 0);
+    vertical-align: middle;
+  }
+
+  .table-custom tr:hover {
+    background-color: rgb(255, 0, 0);
+    transition: background-color 0.3s ease;
+  }
+
+  .tarifa-badge {
+    background-color: rgb(165, 248, 168);
+    border-radius: 12px;
+    padding: 3px 10px;
+    font-size: 0.85em;
   }
 </style>

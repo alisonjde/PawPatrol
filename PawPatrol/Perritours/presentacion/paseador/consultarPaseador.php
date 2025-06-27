@@ -1,55 +1,23 @@
 <?php
+include("presentacion/fondo.php");
+include("presentacion/admin/menuAdmin.php");
+
+
+
 if ($_SESSION["rol"] != "admin") {
     header("Location: ?pid=" . base64_encode("presentacion/noAutorizado.php"));
     exit();
 }
 ?>
 
-<style>
-.glass {
-    background: rgba(50, 30, 80, 0.85);
-    border-radius: 1rem;
-    box-shadow: 0 8px 24px rgba(120, 50, 220, 0.3);
-    backdrop-filter: blur(10px);
-    color: #f0e6ff;
-}
 
-.table-custom {
-    background-color: #2A1A40;
-    border-collapse: collapse;
-    color: #f5f0ff;
-}
+<body>  
 
-.table-custom th {
-    background-color: #6A0DAD; 
-    color: #ffffff;
-    border-bottom: 2px solid #B388EB;
-    text-align: center;
-}
-
-.table-custom td {
-    background-color: #3D2B56; 
-    color: #f5f0ff;
-    border-top: 1px solid #6A0DAD;
-    vertical-align: middle;
-}
-
-.table-custom tr:hover {
-    background-color: #5C4B89; 
-    transition: background-color 0.3s ease;
-}
-</style>
-
-<body>
-    <?php
-    include("presentacion/fondo.php");
-    include("presentacion/admin/menuAdmin.php");
-    ?>
 
     <div class="text-center py-3 hero-text">
         <div class="container glass py-3">
             <h1 class="display-6">Listado de Paseadores</h1>
-            
+
             <div class="mb-4 text-center">
                 <input type="text" id="filtro" class="form-control w-50 mx-auto"
                     placeholder="Buscar paseador por nombre, correo o teléfono...">
@@ -71,34 +39,34 @@ if ($_SESSION["rol"] != "admin") {
                         <?php
                         $paseador = new Paseador();
                         $paseadores = $paseador->consultarTodos();
-                        foreach($paseadores as $pas) {
+                        foreach ($paseadores as $pas) {
                         ?>
-                        <tr>
-                            <td>
-                                <img src="<?php echo htmlspecialchars($pas->getFoto()) ?>"
-                                     class="rounded-circle"
-                                     style="width: 50px; height: 50px; object-fit: cover;"
-                                     alt="Foto paseador"
-                                     onerror="this.src='img/default-profile.png'">
-                            </td>
-                            <td><?php echo $pas->getId()?></td>
-                            <td><?php echo $pas->getNombre() ." ". $pas->getApellido()?></td>
-                            <td><?php echo $pas->getCorreo() ?></td>
-                            <td><?php echo $pas->getTelefono() ?></td>
-                            <td>
-                                <a href="?pid=<?php echo base64_encode("presentacion/paseador/editarPaseador.php") ?>&idPaseador=<?php echo $paseador->getId() ?>" 
-                                   class="btn btn-sm btn-primary" 
-                                   title="Editar paseador">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <button class="btn btn-sm btn-danger btn-eliminar" 
-                                        data-id="<?php echo $pas->getId() ?>" 
+                            <tr>
+                                <td>
+                                    <img src="<?php echo htmlspecialchars($pas->getFoto()) ?>"
+                                        class="rounded-circle"
+                                        style="width: 50px; height: 50px; object-fit: cover;"
+                                        alt="Foto paseador"
+                                        onerror="this.src='img/default-profile.png'">
+                                </td>
+                                <td><?php echo $pas->getId() ?></td>
+                                <td><?php echo $pas->getNombre() . " " . $pas->getApellido() ?></td>
+                                <td><?php echo $pas->getCorreo() ?></td>
+                                <td><?php echo $pas->getTelefono() ?></td>
+                                <td>
+                                    <a href="?pid=<?php echo base64_encode("presentacion/paseador/editarPaseador.php") ?>&idPaseador=<?php echo $paseador->getId() ?>"
+                                        class="btn btn-sm btn-primary"
+                                        title="Editar paseador">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-danger btn-eliminar"
+                                        data-id="<?php echo $pas->getId() ?>"
                                         data-nombre="<?php echo htmlspecialchars($pas->getNombre()) ?>"
                                         title="Eliminar paseador">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -130,35 +98,34 @@ if ($_SESSION["rol"] != "admin") {
     </div>
 
     <script>
-        $(document).ready(function () {
-            $("#filtro").keyup(function () {
+        $(document).ready(function() {
+            $("#filtro").keyup(function() {
                 if ($("#filtro").val().length > 2) {
                     var ruta = "modificarPaseadorAjax.php?filtro=" + $("#filtro").val().replaceAll(" ", "%20");
                     $("#resultados").load(ruta);
                 }
             });
         });
-    
-    
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const botonesEliminar = document.querySelectorAll('.btn-eliminar');
-        const modal = new bootstrap.Modal(document.getElementById('confirmarEliminacion'));
-        const nombrePaseador = document.getElementById('nombrePaseador');
-        const idPaseador = document.getElementById('idPaseador');
-        const formEliminar = document.getElementById('formEliminar');
-        
-        botonesEliminar.forEach(boton => {
-            boton.addEventListener('click', function() {
-                nombrePaseador.textContent = this.getAttribute('data-nombre');
-                idPaseador.value = this.getAttribute('data-id');
-                modal.show();
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const botonesEliminar = document.querySelectorAll('.btn-eliminar');
+            const modal = new bootstrap.Modal(document.getElementById('confirmarEliminacion'));
+            const nombrePaseador = document.getElementById('nombrePaseador');
+            const idPaseador = document.getElementById('idPaseador');
+            const formEliminar = document.getElementById('formEliminar');
+
+            botonesEliminar.forEach(boton => {
+                boton.addEventListener('click', function() {
+                    nombrePaseador.textContent = this.getAttribute('data-nombre');
+                    idPaseador.value = this.getAttribute('data-id');
+                    modal.show();
+                });
             });
-        });
 
-        formEliminar.addEventListener('submit', function(e) {
+            formEliminar.addEventListener('submit', function(e) {});
         });
-    });
     </script>
-    
+
 </body>
