@@ -70,8 +70,8 @@ if(isset($_POST['crear'])) {
                 <div class="alert alert-danger"><?php echo $error ?></div>
             <?php endif; ?>
             
-            <div class="card mx-auto" style="max-width: 40rem; background-color: transparent; border: 3px solid blueviolet;">
-                <div style="border-bottom: 2px dashed blueviolet;" class="card-header display-6 text-light">
+            <div class="card mx-auto" style="max-width: 40rem; background-color: transparent; border: 3px solid black;">
+                <div style="border-bottom: 2px dashed black;" class="card-header display-6 text-light">
                     Datos del Perro
                 </div>
                 <div class="card-body text-light">
