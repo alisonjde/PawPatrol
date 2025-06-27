@@ -1,6 +1,7 @@
 <?php
 
-class AdminDAO {
+class AdminDAO
+{
     private $id;
     private $nombre;
     private $apellido;
@@ -8,8 +9,9 @@ class AdminDAO {
     private $correo;
     private $telefono;
     private $clave;
-    
-    public function __construct($id = 0, $nombre = "", $apellido = "", $foto = "", $correo = "", $telefono = 0, $clave = "") {
+
+    public function __construct($id = 0, $nombre = "", $apellido = "", $foto = "", $correo = "", $telefono = 0, $clave = "")
+    {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->apellido = $apellido;
@@ -18,16 +20,18 @@ class AdminDAO {
         $this->telefono = $telefono;
         $this->clave = $clave;
     }
-    
-    public function autenticar() {
+
+    public function autenticar()
+    {
         return "SELECT idAdmin
                 FROM admin
                 WHERE correo = '" . $this->correo . "' AND clave = '" . md5($this->clave) . "'";
     }
-    
-    public function consultar() {
-        return "SELECT nombre, correo, telefono
-                FROM admin
-                WHERE idAdmin = '" . $this->id . "'";
+
+    public function consultar()
+    {
+        return "SELECT nombre, apellido, foto, correo, telefono
+            FROM admin
+            WHERE idAdmin = '" . $this->id . "'";
     }
 }

@@ -21,7 +21,9 @@ if ($_SESSION["rol"] != "admin") {
             <img src="<?php echo $admin->getFoto(); ?>"
                 class="rounded-circle"
                 style="width: 100%; max-width: 150px;"
-                alt="Foto de <?php echo $admin->getNombre(); ?>">
+                alt="Foto de <?php echo $admin->getNombre(); ?>"
+                onerror="this.onerror=null; this.src='img/default-profile.png';">
+
 
             <div class="card m-3 mx-auto" style="max-width: 40rem; background-color: transparent; border: 3px solid black;">
                 <div style="border-bottom: 2px dashed black;" class="card-header display-6 text-light">
