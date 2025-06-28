@@ -123,3 +123,24 @@ CREATE TABLE disponibilidad (
     FOREIGN KEY (idPaseador) REFERENCES paseador(idPaseador),
     FOREIGN KEY (idDia) REFERENCES dias(idDia)
 );
+
+
+
+CREATE TABLE IF NOT EXISTS `estadoPaseador` (
+  `idEstado` INT NOT NULL AUTO_INCREMENT,
+  `estado` VARCHAR(20) NOT NULL, 
+  PRIMARY KEY (`idEstado`)
+) ENGINE = InnoDB;
+
+
+ALTER TABLE `paseador`
+ADD COLUMN `idEstado` INT NULL;
+
+UPDATE `paseador` SET `idEstado` = 1;
+
+ALTER TABLE `paseador`
+ADD CONSTRAINT `fk_paseador_estado`
+  FOREIGN KEY (`idEstado`)
+  REFERENCES `estados` (`idEstado`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;

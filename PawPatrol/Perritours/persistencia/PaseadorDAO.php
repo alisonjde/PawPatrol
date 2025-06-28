@@ -10,9 +10,10 @@ class PaseadorDAO
     private $clave;
     private $descripcion;
     private $disponibilidad;
+    private $estadoPaseador;
 
 
-    public function __construct($id = 0, $nombre = "", $apellido = "", $foto = "", $correo = "", $telefono = 0, $clave = "", $descripcion = "", $disponibilidad = "")
+    public function __construct($id = 0, $nombre = "", $apellido = "", $foto = "", $correo = "", $telefono = 0, $clave = "", $descripcion = "", $disponibilidad = "", $estadoPaseador = "")
     {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -23,6 +24,7 @@ class PaseadorDAO
         $this->clave = $clave;
         $this->descripcion = $descripcion;
         $this->disponibilidad = $disponibilidad;
+        $this->estadoPaseador = $estadoPaseador;
     }
 
 
@@ -50,7 +52,7 @@ class PaseadorDAO
     public function crear()
     {
         return "INSERT INTO paseador 
-    (idPaseador, nombre, apellido, foto, correo, telefono, clave, descripcion, disponibilidad)
+    (idPaseador, nombre, apellido, foto, correo, telefono, clave, descripcion, disponibilidad, idEstado)
     VALUES 
     ('" . $this->id . "',
      '" . $this->nombre . "',
@@ -60,8 +62,10 @@ class PaseadorDAO
      '" . $this->telefono . "',
      '" . $this->clave . "',
      '" . $this->descripcion . "',
-     '" . $this->disponibilidad . "')";
+     '" . $this->disponibilidad . "',
+     '" . $this->estadoPaseador . "')";
     }
+
 
 
     public function actualizar()
@@ -89,7 +93,7 @@ class PaseadorDAO
     }
 
 
-   
+
     public function modificar($filtros)
     {
         $condiciones = [];

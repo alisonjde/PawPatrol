@@ -44,8 +44,8 @@
         } elseif ($tipoUsuario == "paseador") {
 
             $descripcion    = $_POST['descripcion'];
-
-            $paseador = new Paseador($id, $nombre, $apellido, $fotoDestino, $correo, $telefono, $clave, $descripcion);
+            $estadoPaseador = 2;
+            $paseador = new Paseador($id, $nombre, $apellido, $fotoDestino, $correo, $telefono, $clave, $descripcion,$estadoPaseador);
 
             if ($paseador->crear()) {
                 $mensaje = "<div class='alert alert-success mt-3'>Paseador registrado correctamente.</div>";

@@ -7,13 +7,15 @@ class Paseador extends Persona
 {
     private $descripcion;
     private $disponibilidad;
+    private $estadoPaseador;
 
 
-    public function __construct($id = "", $nombre = "", $apellido = "", $foto = "", $correo = "", $telefono = "", $clave = "", $descripcion = "", $disponibilidad = "")
+    public function __construct($id = "", $nombre = "", $apellido = "", $foto = "", $correo = "", $telefono = "", $clave = "", $descripcion = "", $disponibilidad = "", $estadoPaseador="")
     {
         parent::__construct($id, $nombre, $apellido, $foto, $correo, $telefono, $clave);
         $this->descripcion = $descripcion;
         $this->disponibilidad = $disponibilidad;
+        $this->estadoPaseador =$estadoPaseador;
     }
 
 
@@ -25,6 +27,11 @@ class Paseador extends Persona
     public function getDisponibilidad()
     {
         return $this->disponibilidad;
+    }
+
+    public function getEstadoPaseador()
+    {
+        return $this->estadoPaseador;
     }
 
 
@@ -86,7 +93,8 @@ class Paseador extends Persona
             $this->telefono,
             $this->clave,
             $this->descripcion,
-            $this->disponibilidad
+            $this->disponibilidad,
+            $this->estadoPaseador
         );
 
         $conexion->abrir();
