@@ -160,6 +160,24 @@ class PaseadorDAO
     ORDER BY p.nombre";
     }
 
+
+    public function consultarPorEstado2()
+    {
+        return "SELECT 
+        p.idPaseador, 
+        p.nombre, 
+        p.apellido, 
+        p.foto, 
+        p.correo, 
+        p.telefono, 
+        p.descripcion, 
+        p.disponibilidad, 
+        e.estado AS estadoPaseador
+    FROM paseador p
+    INNER JOIN estadoPaseador e ON p.idEstado = e.idEstado
+    WHERE p.idEstado = 1
+    ORDER BY p.nombre";
+    }
     public function consultarEstados()
     {
         return "SELECT idEstado, estado AS nombre FROM estadoPaseador";

@@ -4,7 +4,7 @@
   include("presentacion/fondo.php");
 
   $paseador = new Paseador();
-  $listaPaseadores = $paseador->consultarTodos();
+  $listaPaseadores = $paseador->consultar_estad2();
   $cantidad = count($listaPaseadores);
   ?>
 
@@ -84,8 +84,11 @@
       <?php
       for ($i = 0; $i < $cantidad; $i++) {
         $p = $listaPaseadores[$i];
-        $link = "#";
-        echo '
+
+        
+       
+          $link = "#";
+          echo '
         <div class="col-md-4 mb-4">
           <a href="' . $link . '" class="text-decoration-none text-dark">
             <div class="card h-100 shadow">
@@ -100,7 +103,9 @@
             </div>
           </a>
         </div>';
+        
       }
+
       ?>
     </div>
   </div>

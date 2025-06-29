@@ -234,6 +234,36 @@ class Paseador extends Persona
         return $paseadores;
     }
 
+    public function consultar_estad2()
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+
+        $paseadorDAO = new PaseadorDAO();
+        $conexion->ejecutar($paseadorDAO->consultarPorEstado2());
+
+        $paseadores = array();
+        while (($datos = $conexion->registro()) != null) {
+            $paseador = new Paseador(
+                $datos[0],
+                $datos[1],
+                $datos[2],
+                $datos[3],
+                $datos[4],
+                $datos[5],
+                "",
+                $datos[6],
+                $datos[7],
+                $datos[8]
+            );
+            array_push($paseadores, $paseador);
+        }
+
+        $conexion->cerrar();
+        return $paseadores;
+    }
+
+
     public function eliminar()
     {
         $conexion = new Conexion();
@@ -258,24 +288,25 @@ class Paseador extends Persona
         return $resultado;
     }
 
-    public function obtenerEstados()
-    {
-        $conexion = new Conexion();
-        $conexion->abrir();
-        $paseadorDAO = new PaseadorDAO();
+   public function obtenerEstados()
+{
+    $conexion = new Conexion();
+    $conexion->abrir();
+    $paseadorDAO = new PaseadorDAO();
 
-        $estados = array();
+    $estados = array();
 
-        if ($conexion->ejecutar($paseadorDAO->consultarEstados())) {
-            while (($datos = $conexion->registro()) != null) {
-                $estados[] = array(
-                    "id" => $datos[0],
-                    "nombre" => $datos[1]
-                );
-            }
+    if ($conexion->ejecutar($paseadorDAO->consultarEstados())) {
+        while (($datos = $conexion->registro()) != null) {
+            $estados[] = array(
+                "id" => $datos[0],
+                "nombre" => $datos[1]
+            );
         }
-
-        $conexion->cerrar();
-        return $estados;
     }
+
+    $conexion->cerrar();
+    return $estados;
+}
+
 }
