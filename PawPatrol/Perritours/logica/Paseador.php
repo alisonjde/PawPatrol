@@ -247,4 +247,35 @@ class Paseador extends Persona
 
         return $resultado;
     }
+
+    public function actualizarEstado($estadoNuevo)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $paseadorDAO = new PaseadorDAO($this->id, "", "", "", "", "", "", "", "", $estadoNuevo);
+        $resultado = $conexion->ejecutar($paseadorDAO->actualizarEstado());
+        $conexion->cerrar();
+        return $resultado;
+    }
+
+    public function obtenerEstados()
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $paseadorDAO = new PaseadorDAO();
+
+        $estados = array();
+
+        if ($conexion->ejecutar($paseadorDAO->consultarEstados())) {
+            while (($datos = $conexion->registro()) != null) {
+                $estados[] = array(
+                    "id" => $datos[0],
+                    "nombre" => $datos[1]
+                );
+            }
+        }
+
+        $conexion->cerrar();
+        return $estados;
+    }
 }

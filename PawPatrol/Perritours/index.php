@@ -42,6 +42,7 @@ $paginas_con_autenticacion = array(
     "presentacion/paseador/crearPaseador.php",
     "presentacion/paseador/consultarPaseador.php",
     "presentacion/paseador/editarPaseador.php",
+    "presentacion/paseador/cambiarEstadoPaseador.php",
     "presentacion/paseador/eliminarPaseador.php",
     "presentacion/dueño/consultarDueño.php",
     "presentacion/perro/consultarPerro.php",

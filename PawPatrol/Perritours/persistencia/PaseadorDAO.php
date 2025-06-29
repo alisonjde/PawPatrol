@@ -117,7 +117,7 @@ class PaseadorDAO
             $condiciones[] = "(p.nombre LIKE '%$filtro%' OR p.apellido LIKE '%$filtro%' OR p.correo LIKE '%$filtro%' OR p.telefono LIKE '%$filtro%')";
         }
 
-                
+
         $filtroSql = count($condiciones) > 0 ? " AND " . implode(" AND ", $condiciones) : "";
 
         return "SELECT 
@@ -134,6 +134,11 @@ class PaseadorDAO
             ORDER BY p.nombre";
     }
 
+
+    public function actualizarEstado()
+    {
+        return "UPDATE paseador SET idEstado = " . $this->estadoPaseador . " WHERE idPaseador = " . $this->id;
+    }
 
 
 
@@ -153,5 +158,10 @@ class PaseadorDAO
     INNER JOIN estadoPaseador e ON p.idEstado = e.idEstado
     WHERE p.idEstado = 3
     ORDER BY p.nombre";
+    }
+
+    public function consultarEstados()
+    {
+        return "SELECT idEstado, estado AS nombre FROM estadoPaseador";
     }
 }

@@ -54,13 +54,20 @@ if ($_SESSION["rol"] != "admin") {
                                 <td><?php echo $pas->getNombre() . " " . $pas->getApellido() ?></td>
                                 <td><?php echo $pas->getCorreo() ?></td>
                                 <td><?php echo $pas->getTelefono() ?></td>
-                                <td><?php echo $pas->getEstadoPaseador() ?></td>
+                                <td id="estadoPaseador<?php echo $pas->getId() ?>">
+                                    <?php echo $pas->getEstadoPaseador() ?>
+                                </td>
+
                                 <td>
-                                    <a href="?pid=<?php echo base64_encode("presentacion/paseador/editarPaseador.php") ?>&idPaseador=<?php echo $paseador->getId() ?>"
-                                        class="btn btn-sm btn-primary"
-                                        title="Editar paseador">
+
+                                    <button class="btn btn-sm btn-primary btn-confirmar"
+                                        id="btnConfirmar<?php echo $pas->getId() ?>"
+                                        data-id="<?php echo $pas->getId() ?>"
+                                        title="Confirmar paseador">
                                         <i class="fas fa-check"></i>
-                                    </a>
+                                    </button>
+
+
                                     <button class="btn btn-sm btn-danger btn-eliminar"
                                         data-id="<?php echo $pas->getId() ?>"
                                         data-nombre="<?php echo htmlspecialchars($pas->getNombre()) ?>"
@@ -90,7 +97,7 @@ if ($_SESSION["rol"] != "admin") {
                 </div>
                 <div class="modal-footer border-secondary">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <form id="formEliminar" method="post" action="?pid=<?php echo base64_encode("presentacion/paseador/eliminarPaseador.php") ?>">
+                    <form id="formEliminar" method="post" action="?pid=<?php echo base64_encode("presentacion/paseador/eliminarEstado.php") ?>">
                         <input type="hidden" name="idPaseador" id="idPaseador">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
@@ -131,5 +138,24 @@ if ($_SESSION["rol"] != "admin") {
             formEliminar.addEventListener('submit', function(e) {});
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $(".btn-confirmar").click(function() {
+                const id = $(this).data("id");
+                const ruta = "cambiarEstadoPaseadorAjax.php?idPaseador=" + id;
+
+                $.get(ruta, function(response) {
+                    if (response.trim() === "Activo") {
+                        location.reload(); 
+                    } else {
+                        alert("Error al actualizar el estado: " + response);
+                    }
+                });
+            });
+        });
+    </script>
+
+
 
 </body>
