@@ -7,8 +7,8 @@ class PaseoDAO {
     private $idPaseador;
     
     public function __construct($idPaseo = 0, $idTarifa = 0, $fecha = "", $hora = "", $idPaseador = 0) {
-        $this->id_paseo = $idPaseo;
-        $this->tarifa = $idTarifa;
+        $this->idPaseo = $idPaseo;
+        $this->idTarifa = $idTarifa;
         $this->fecha = $fecha;
         $this->hora = $hora;
         $this->idPaseador = $idPaseador;

@@ -10,12 +10,12 @@ class Paseador extends Persona
     private $estadoPaseador;
 
 
-    public function __construct($id = "", $nombre = "", $apellido = "", $foto = "", $correo = "", $telefono = "", $clave = "", $descripcion = "", $disponibilidad = "", $estadoPaseador="")
+    public function __construct($id = "", $nombre = "", $apellido = "", $foto = "", $correo = "", $telefono = "", $clave = "", $descripcion = "", $disponibilidad = "", $estadoPaseador = "")
     {
         parent::__construct($id, $nombre, $apellido, $foto, $correo, $telefono, $clave);
         $this->descripcion = $descripcion;
         $this->disponibilidad = $disponibilidad;
-        $this->estadoPaseador =$estadoPaseador;
+        $this->estadoPaseador = $estadoPaseador;
     }
 
 
@@ -170,7 +170,7 @@ class Paseador extends Persona
         return $resultado;
     }
 
-   
+
     public function modificar($filtros)
     {
         $conexion = new Conexion();
@@ -179,7 +179,7 @@ class Paseador extends Persona
         $conexion->ejecutar($paseadorDAO->modificar($filtros));
 
         $paseadores = array();
-        while (($datos = $conexion->registro())!=null) {
+        while (($datos = $conexion->registro()) != null) {
             $paseador = new Paseador($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5]);
             array_push($paseadores, $paseador);
         }
@@ -188,4 +188,63 @@ class Paseador extends Persona
         return $paseadores;
     }
 
+    public function modificarAceptar($filtros)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $paseadorDAO = new PaseadorDAO();
+        $conexion->ejecutar($paseadorDAO->modificarAceptar($filtros));
+
+        $paseadores = array();
+        while (($datos = $conexion->registro()) != null) {
+            $paseador = new Paseador($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5], "", "", "", $datos[6]);
+            array_push($paseadores, $paseador);
+        }
+
+        $conexion->cerrar();
+        return $paseadores;
+    }
+
+    public function consultar_estado()
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+
+        $paseadorDAO = new PaseadorDAO();
+        $conexion->ejecutar($paseadorDAO->consultarPorEstado());
+
+        $paseadores = array();
+        while (($datos = $conexion->registro()) != null) {
+            $paseador = new Paseador(
+                $datos[0],
+                $datos[1],
+                $datos[2],
+                $datos[3],
+                $datos[4],
+                $datos[5],
+                "",
+                $datos[6],
+                $datos[7],
+                $datos[8]
+            );
+            array_push($paseadores, $paseador);
+        }
+
+        $conexion->cerrar();
+        return $paseadores;
+    }
+
+    public function eliminar()
+    {
+        $conexion = new Conexion();
+        $paseadorDAO = new PaseadorDAO($this->id);
+        $conexion->abrir();
+        $conexion->ejecutar($paseadorDAO->eliminar());
+        $resultado = true;
+
+        $conexion->cerrar();
+
+
+        return $resultado;
+    }
 }

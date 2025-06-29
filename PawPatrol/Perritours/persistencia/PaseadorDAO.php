@@ -108,4 +108,50 @@ class PaseadorDAO
                 WHERE $consulta";
         return $sentencia;
     }
+
+    public function modificarAceptar($filtros)
+    {
+        $condiciones = [];
+
+        foreach ($filtros as $filtro) {
+            $condiciones[] = "(p.nombre LIKE '%$filtro%' OR p.apellido LIKE '%$filtro%' OR p.correo LIKE '%$filtro%' OR p.telefono LIKE '%$filtro%')";
+        }
+
+                
+        $filtroSql = count($condiciones) > 0 ? " AND " . implode(" AND ", $condiciones) : "";
+
+        return "SELECT 
+                p.idPaseador, 
+                p.nombre, 
+                p.apellido, 
+                p.foto, 
+                p.correo, 
+                p.telefono, 
+                ep.estado AS estadoPaseador
+            FROM paseador p
+            INNER JOIN estadoPaseador ep ON p.idEstado = ep.idEstado
+            WHERE p.idEstado = 3 $filtroSql
+            ORDER BY p.nombre";
+    }
+
+
+
+
+    public function consultarPorEstado()
+    {
+        return "SELECT 
+        p.idPaseador, 
+        p.nombre, 
+        p.apellido, 
+        p.foto, 
+        p.correo, 
+        p.telefono, 
+        p.descripcion, 
+        p.disponibilidad, 
+        e.estado AS estadoPaseador
+    FROM paseador p
+    INNER JOIN estadoPaseador e ON p.idEstado = e.idEstado
+    WHERE p.idEstado = 3
+    ORDER BY p.nombre";
+    }
 }
