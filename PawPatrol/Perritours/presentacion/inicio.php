@@ -85,10 +85,11 @@
       for ($i = 0; $i < $cantidad; $i++) {
         $p = $listaPaseadores[$i];
 
-        
-       
-          $link = "#";
-          echo '
+
+
+        $link = '?pid=' . base64_encode('presentacion/paseador/info-Paseador.php') . '&id=' . $p->getId();
+
+        echo '
         <div class="col-md-4 mb-4">
           <a href="' . $link . '" class="text-decoration-none text-dark">
             <div class="card h-100 shadow">
@@ -103,7 +104,6 @@
             </div>
           </a>
         </div>';
-        
       }
 
       ?>

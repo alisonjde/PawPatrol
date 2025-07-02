@@ -33,6 +33,7 @@ $paginas_sin_autenticacion = array(
     "presentacion/noAutorizado.php",
     "presentacion/error.php",
     "presentacion/RegistrarUsuario.php",
+    "presentacion/paseador/info-Paseador.php"
 );
 
 $paginas_con_autenticacion = array(
@@ -49,7 +50,8 @@ $paginas_con_autenticacion = array(
     "presentacion/perro/consultarPorDueño.php",
      "presentacion/perro/crearPerro.php",
     "presentacion/paseito/consultarPaseo.php",
-    "presentacion/paseador/confirmarPaseador.php"
+    "presentacion/paseador/confirmarPaseador.php",
+    "presentacion/paseito/consultarPaseo_paseador.php"
 );
 
 if(!isset($_GET["pid"])){

@@ -1,10 +1,13 @@
 <?php
-  include("presentacion/fondo.php");
+include("presentacion/fondo.php");
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <a class="navbar-brand fs-4" href="?pid=<?php echo base64_encode("presentacion/sesionPaseador.php") ?>">🐾 Perritours</a>
+        <a class="navbar-brand fs-4" href="?pid=<?php echo base64_encode("presentacion/inicio.php") ?>">
+            <img src="imagenes/logo.png" alt="Logo" style="height: 50px; width: auto; margin-right: 10px;">
+            Scooby-Paseo
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPaseadorContent"
             aria-controls="navbarPaseadorContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,7 +35,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item text-light" href="#">Oferta de paseos</a></li>
-                        <a class="dropdown-item text-light" href="?pid=<?php echo base64_encode("presentacion/paseito/consultarPaseo.php") ?>">Consultar mis paseos</a>
+                        <a class="dropdown-item text-light" href="?pid=<?php echo base64_encode("presentacion/paseito/consultarPaseo_paseador.php") ?>">Consultar mis paseos</a>
                     </ul>
                 </li>
             </ul>
